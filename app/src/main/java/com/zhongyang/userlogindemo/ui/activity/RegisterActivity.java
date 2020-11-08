@@ -1,4 +1,4 @@
-package com.zhongyang.userlogindemo.ui;
+package com.zhongyang.userlogindemo.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

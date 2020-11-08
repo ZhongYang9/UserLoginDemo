@@ -57,6 +57,8 @@ public class LoginDao implements ILoginDao {
                 isCorrect = false;
             }
 
+            /*关闭游标*/
+            cursor.close();
             /*事务成功*/
             db.setTransactionSuccessful();
         } catch (Exception e) {
@@ -94,6 +96,8 @@ public class LoginDao implements ILoginDao {
                 isExistence = true;
             }
 
+            /*关闭游标*/
+            cursor.close();
             /*事务成功*/
             db.setTransactionSuccessful();
         } catch (Exception e) {

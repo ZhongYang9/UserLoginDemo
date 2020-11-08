@@ -1,7 +1,6 @@
-package com.zhongyang.userlogindemo.ui;
+package com.zhongyang.userlogindemo.ui.activity;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;

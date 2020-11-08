@@ -100,6 +100,8 @@ public class RegisterDao implements IRegisterDao {
                 isRegistered = true;
             }
 
+            /*关闭游标*/
+            cursor.close();
             /*事务成功*/
             db.setTransactionSuccessful();
         } catch (Exception e) {

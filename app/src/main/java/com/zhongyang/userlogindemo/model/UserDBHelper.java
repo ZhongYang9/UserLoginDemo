@@ -32,8 +32,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
         /*建表*/
         String userTb = "create table " + Constants.USER_TB_NAME + "(_id integer primary key autoincrement,account varchar,password varchar)";
         db.execSQL(userTb);
-        String insertTest = "insert into " + Constants.USER_TB_NAME + " (account,password) values ('111','1')";
-        db.execSQL(insertTest);
+        /*添加几条数据*/
+        for (int i = 0; i < 20; i++) {
+            String insertTest = "insert into " + Constants.USER_TB_NAME + " (account,password) values ('28257" + i + "','111111')";
+            db.execSQL(insertTest);
+        }
     }
 
     @Override

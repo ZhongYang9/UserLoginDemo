@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/ic_login_bg"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_centerContainer"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_loginAccount"
+            android:id="@+id/til_registerAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_input_box_bg"
@@ -50,7 +50,7 @@
             app:boxBackgroundMode="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/til_loginAccount">
+            app:layout_constraintTop_toBottomOf="@+id/til_registerAccount">
 
             <EditText
                 android:id="@+id/et_loginPwd"
@@ -69,10 +69,10 @@
     <Button
         android:id="@+id/btn_login"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/shape_login_btn_bg"
-        android:text="登录"
+        android:text="@string/text_login"
         app:layout_constraintEnd_toStartOf="@+id/marginRight"
         app:layout_constraintStart_toStartOf="@+id/marginLeft"
         app:layout_constraintTop_toBottomOf="@+id/cl_centerContainer" />
@@ -100,4 +100,34 @@
         app:layout_constraintEnd_toStartOf="@+id/marginRight"
         app:layout_constraintStart_toStartOf="@+id/marginLeft"
         app:srcCompat="@mipmap/ic_user_head" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="还没有账号？"
+        android:textColor="@color/coloCommonlyText"
+        app:layout_constraintEnd_toStartOf="@+id/tv_loginToRegister"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_loginToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="马上注册"
+        android:textColor="@color/violet"
+        app:layout_constraintEnd_toStartOf="@+id/marginRight"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <TextView
+        android:id="@+id/tv_forgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="忘记密码"
+        android:textColor="@color/violet"
+        app:layout_constraintStart_toStartOf="@+id/marginLeft"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>

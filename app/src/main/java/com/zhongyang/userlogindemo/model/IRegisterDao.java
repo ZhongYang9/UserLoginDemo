@@ -10,14 +10,14 @@ import com.zhongyang.userlogindemo.model.domain.User;
  * @作者 钟阳
  * @描述 用户注册的DAO接口
  */
-public interface IUserDao {
+public interface IRegisterDao {
 
     /**
      * 设置回调接口
      *
      * @param callback
      */
-    void setCallback(IUserDaoCallback callback);
+    void setCallback(IRegisterDaoCallback callback);
 
     /**
      * 添加用户

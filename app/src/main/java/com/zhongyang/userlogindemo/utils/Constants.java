@@ -18,7 +18,4 @@ public class Constants {
 
     //数据库版本号
     public static int VERSION_CODE = 1;
-
-    //注册码 | 1表示未注册
-    public static final int CODE_REGISTER = 1;
 }

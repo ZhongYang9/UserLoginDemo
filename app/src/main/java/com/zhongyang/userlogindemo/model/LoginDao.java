@@ -1,73 +1,68 @@
 package com.zhongyang.userlogindemo.model;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.zhongyang.userlogindemo.base.BaseApplication;
-import com.zhongyang.userlogindemo.model.domain.User;
 import com.zhongyang.userlogindemo.utils.Constants;
 
 /**
  * @项目名称 UserLoginDemo
- * @类名 RegisterUserDao
+ * @类名 LoginDao
  * @包名 com.zhongyang.userlogindemo.model
- * @创建时间 2020/11/8 17:03
+ * @创建时间 2020/11/8 20:13
  * @作者 钟阳
- * @描述 注册用户的DAO实现类
+ * @描述
  */
-public class RegisterUserDao implements IUserDao {
-
-    private IUserDaoCallback mViewCallback = null;
-    private UserDBHelper mHelper;
+public class LoginDao implements ILoginDao {
+    private ILoginDaoCallback mViewCallback = null;
+    private final UserDBHelper mHelper;
 
     //单例
-    private RegisterUserDao() {
-        //获取数据库操作类对象
+    private LoginDao() {
+        //获取到数据库操作对象
         mHelper = new UserDBHelper(BaseApplication.getAppContext());
     }
 
-    private static RegisterUserDao sRegisterUserDao = null;
+    private static LoginDao sLoginDao = null;
 
-    public static RegisterUserDao getRegisterUserDao() {
-        if (sRegisterUserDao == null) {
-            synchronized (RegisterUserDao.class) {
-                if (sRegisterUserDao == null) {
-                    sRegisterUserDao = new RegisterUserDao();
-                }
-            }
+    public static LoginDao getLoginDao() {
+        if (sLoginDao == null) {
+            sLoginDao = new LoginDao();
         }
-        return sRegisterUserDao;
+        return sLoginDao;
     }
 
     @Override
-    public void setCallback(IUserDaoCallback callback) {
+    public void setCallback(ILoginDaoCallback callback) {
         this.mViewCallback = callback;
     }
 
     @Override
-    public void addUser(User user) {
+    public void checkPwd(String account, String password) {
         SQLiteDatabase db = null;
-        boolean isSuccess = false;
+        boolean isCorrect = false;//定义是否正确标示量
         try {
             /*打开数据库*/
-            db = mHelper.getWritableDatabase();
+            db = mHelper.getReadableDatabase();
             /*开启事务*/
             db.beginTransaction();
-            /*添加数据*/
-            ContentValues values = new ContentValues();
-            values.put("account", user.getAccount());
-            values.put("password", user.getPassword());
-            db.insert(Constants.USER_TB_NAME, null, values);
+            /*查询数据库*/
+            Cursor cursor = db.query(Constants.USER_TB_NAME, null, "account =? and password =?", new String[]{account, password}, null, null, null);
+            if (cursor.moveToNext()) {
+                //密码正确
+                isCorrect = true;
+            } else {
+                isCorrect = false;
+            }
 
             /*事务成功*/
             db.setTransactionSuccessful();
-            //设置标示量
-            isSuccess = true;
         } catch (Exception e) {
             e.printStackTrace();
-            //设置标示量
-            isSuccess = false;
+            /*修改标示量*/
+            isCorrect = false;
         } finally {
             /*关闭数据库*/
             if (db != null) {
@@ -77,7 +72,7 @@ public class RegisterUserDao implements IUserDao {
             }
             /*通知结果*/
             if (mViewCallback != null) {
-                mViewCallback.onAddUserLoaded(isSuccess);
+                mViewCallback.onCheckPwdResult(isCorrect);
             }
         }
     }
@@ -85,27 +80,26 @@ public class RegisterUserDao implements IUserDao {
     @Override
     public void checkUser(String account) {
         SQLiteDatabase db = null;
-        boolean isRegistered = false;
+        boolean isExistence = false;//定义用户是否存在的标示量
         try {
             /*打开数据库*/
             db = mHelper.getReadableDatabase();
             /*开启事务*/
             db.beginTransaction();
-            /*执行查询语句*/
+            /*查询数据库*/
             Cursor cursor = db.query(Constants.USER_TB_NAME, null, "account =?", new String[]{account}, null, null, null);
             if (cursor.getCount() == 0) {
-                //说明用户已存在
-                isRegistered = false;
+                isExistence = false;
             } else {
-                isRegistered = true;
+                isExistence = true;
             }
 
             /*事务成功*/
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
-            //
-            isRegistered = true;
+            /*修改标示量*/
+            isExistence = true;
         } finally {
             /*关闭数据库*/
             if (db != null) {
@@ -113,9 +107,9 @@ public class RegisterUserDao implements IUserDao {
                 db.endTransaction();
                 db.close();
             }
-            /*通知查询结果*/
+            /*通知结果*/
             if (mViewCallback != null) {
-                mViewCallback.onCheckUserLoaded(isRegistered);
+                mViewCallback.onCheckUserResult(isExistence);
             }
         }
     }

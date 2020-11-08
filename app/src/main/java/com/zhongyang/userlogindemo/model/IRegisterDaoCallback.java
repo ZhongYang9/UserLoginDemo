@@ -12,7 +12,7 @@ import java.util.List;
  * @作者 钟阳
  * @描述 用户DAO的回调接口
  */
-public interface IUserDaoCallback {
+public interface IRegisterDaoCallback {
 
     /**
      * 添加用户的结果

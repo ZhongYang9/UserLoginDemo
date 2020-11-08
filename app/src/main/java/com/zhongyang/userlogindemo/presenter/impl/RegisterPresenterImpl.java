@@ -2,8 +2,8 @@ package com.zhongyang.userlogindemo.presenter.impl;
 
 import android.util.Log;
 
-import com.zhongyang.userlogindemo.model.IUserDaoCallback;
-import com.zhongyang.userlogindemo.model.RegisterUserDao;
+import com.zhongyang.userlogindemo.model.IRegisterDaoCallback;
+import com.zhongyang.userlogindemo.model.RegisterDao;
 import com.zhongyang.userlogindemo.model.domain.User;
 import com.zhongyang.userlogindemo.presenter.IRegisterPresenter;
 import com.zhongyang.userlogindemo.view.IRegisterViewCallback;
@@ -16,16 +16,16 @@ import com.zhongyang.userlogindemo.view.IRegisterViewCallback;
  * @作者 钟阳
  * @描述 注册接口实现类
  */
-public class RegisterPresenterImpl implements IRegisterPresenter, IUserDaoCallback {
+public class RegisterPresenterImpl implements IRegisterPresenter, IRegisterDaoCallback {
 
     private static final String TAG = "RegisterPresenterImpl";
     private IRegisterViewCallback mRegisterViewCallback = null;
-    private final RegisterUserDao mRegisterUserDao;
+    private final RegisterDao mRegisterUserDao;
 
     //单例
     private RegisterPresenterImpl() {
         //持有逻辑层对象
-        mRegisterUserDao = RegisterUserDao.getRegisterUserDao();
+        mRegisterUserDao = RegisterDao.getRegisterUserDao();
         //注册接口
         mRegisterUserDao.setCallback(this);
     }

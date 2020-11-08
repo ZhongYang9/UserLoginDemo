@@ -1,10 +1,6 @@
 package com.zhongyang.userlogindemo.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +11,6 @@ import com.zhongyang.userlogindemo.R;
 import com.zhongyang.userlogindemo.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class LoginActivity extends BaseActivity {
 

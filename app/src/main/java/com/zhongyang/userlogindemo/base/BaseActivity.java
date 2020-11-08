@@ -34,10 +34,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         mBind = ButterKnife.bind(this);
         //初始化控件方法
         initActivityView();
+        //初始化逻辑层事务
+        initPresenterEvent();
         //初始化事件方法
         initActivityEvent();
         //设置状态字体颜色
         setStatusBar();
+    }
+
+    /**
+     * 初始化化逻辑层的相关事务，由子类根据情况去实现
+     */
+    protected void initPresenterEvent() {
+
     }
 
     /**
